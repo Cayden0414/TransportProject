@@ -28,5 +28,9 @@ public class Station {
         this.next = next;
     }
 
+    public boolean equals(Station A, Station B){
+        return A.getName() == B.getName();
+    }
+
     
 }

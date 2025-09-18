@@ -3,9 +3,13 @@ public class Graph {
     List<String> lines;
     List<Station> stations;
 
+
     public Graph(){
         this.lines = new ArrayList<String>();
         this.stations = new ArrayList<Station>();
+        Queue<Station> willSearch = new Queue();
+        List<Station> searched = new ArrayList<>();
+        List<Station> path = new ArrayList<>();
     }
 
     public void AddStationName(String name, String[] lines, Station previous, Station next){
@@ -35,6 +39,14 @@ public class Graph {
     }
 
     public List<Station> search(Station A, Station B){
-        return;
+        this.path.add(A);
+        this.willSearch.add(A);
+        this.willSearch.add(A.next);
+        this.willSearch.add(A.previous);
+        if(A.equals(B)){
+            return this.path;
+        }
+        return search(A.next, B);
+        
     }
 }
