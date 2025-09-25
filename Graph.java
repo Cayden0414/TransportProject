@@ -39,14 +39,23 @@ public class Graph {
     }
 
     public List<Station> search(Station A, Station B){
+        Station current = A;
         this.path.add(A);
         this.willSearch.add(A);
         this.willSearch.add(A.next);
         this.willSearch.add(A.previous);
-        if(A.equals(B)){
-            return this.path;
-        }
-        return search(A.next, B);
         
+        
+        while(willSearch.size() != 0 || current != B){
+            this.searched.add(current);
+            current = this.willSearch.pop();
+            this.willSearch.add(current.next);
+        }
+        
+        
+    }
+
+    public static void main(String[] args){
+        Station LenfantPlaza = new Station("L'Enfant Plaza", new ArrayList<String>());
     }
 }
