@@ -52,19 +52,34 @@ public class Graph {
        // keep track of the visited set
        Set<Station> visited = new HashSet<>();
        // add the first staring node: to both visited and queue
-       queue.add(start);
-       visited.add(start);
-       while(!eueue.isEmpty()){
+       queue.add(A);
+       visited.add(A);
+       while(!queue.isEmpty()){
            // grab the current station we want to be at
+           Station current = queue.poll();
 
 
            // are we at the goal? then make the path and add it
-
+           
+           if(current.equals(B)){
+               return buildPath(parentMap, A, B);
+           }
 
            // neighbors, add the neighbors
 
+           List<Station> neighbors = new ArrayList<>();
+           neighbors.add(current.next);
+           neighbors.add(current.previous);
 
            // parse thru neighbors
+
+           for(Station n : neighbors){
+               if(!visited.contains(n)){
+                   queue.add(n);
+                   visited.add(n);
+                   parentMap.put(n, current);
+               }
+           }
            // add the neighbors
        }
        return null; // means no path was found
@@ -85,5 +100,7 @@ public class Graph {
 
    public static void main(String[] args){
        Station LenfantPlaza = new Station("L'Enfant Plaza", new ArrayList<String>());
+       Station MetroCenter = new Station("Metro Center", new ArrayList<String>());
+       Station Dulles = new Station("Washington Dulles Int'l Airport", new ArrayList<String>());
    }
 }
